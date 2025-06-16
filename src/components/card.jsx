@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 
@@ -40,19 +40,52 @@ img{
 .div_control{
     display: flex;
     justify-content: center;
+    align-items: top;
     gap: 5px;
 }
 
+.div_control div {
+    display:flex;
+    align-items: center;
+}
 .input {
-    width: 15px;
-    
+    width:25px;
+    padding: 1px;
 }
 `;
 
 
 
-export const Card = ({ imagen, titulo, precio }) => {
+export const Card = ({ imagen, titulo, precio, setCarrito }) => {
     const tallas = [null, 40, 41, 42, 43, 44];
+    const [cantidad, setCantidad] = useState(0);
+    const [tallaSeleccionada, setTallaSeleccionada] = useState(null);
+
+
+    const aumentarCantidad = () => {
+        setCantidad(prev => prev + 1);
+    };
+
+    const reducirCantidad = () => {
+        if (cantidad > 0) {
+            setCantidad(prev => prev - 1);
+        }
+    };
+
+    const añadirAlCarrito = () => {
+        const nuevoArticulo = {
+            nombre: titulo,
+            precio: precio,
+            cantidad: cantidad,
+            talla: tallaSeleccionada
+        };
+
+        setCarrito(prev => [...prev, nuevoArticulo]); // Usa el `setCarrito` de `App.js`
+        setCantidad(0);
+        setTallaSeleccionada(null);
+    };
+
+
 
     return (
         <Contenedor_general>
@@ -68,7 +101,7 @@ export const Card = ({ imagen, titulo, precio }) => {
                     currency: "COP",
                     minimumFractionDigits: 2
                 }).format(precio)}</p>
-                <select>
+                <select value={tallaSeleccionada || "Talla"}  onChange={(e) => setTallaSeleccionada(e.target.value)}>
                     {tallas.map((talla, index) => (
                         <option key={index} value={talla}>
                           {talla === null ? "Talla" : `EUR ${talla}`}
@@ -79,12 +112,12 @@ export const Card = ({ imagen, titulo, precio }) => {
             </div>
             <div className="div_control">
                 <div>
-                    <button>+</button>
-                    <input className="input" type="number"/>
-                    <button>-</button>
+                    <button onClick={reducirCantidad}>-</button>
+                    <input className="input" type="number" value={cantidad} readOnly />
+                    <button onClick={aumentarCantidad}>+</button>
                 </div>
                 <div>
-                    <button onClick={() => añadirAlCarrito()}>Añadir al carrito</button>
+                    <button onClick={() => añadirAlCarrito()} disabled={(tallaSeleccionada == "Talla" || tallaSeleccionada == null) || cantidad === 0}>Añadir al carrito</button>
                 </div>
             </div>
         </Contenedor_general>
