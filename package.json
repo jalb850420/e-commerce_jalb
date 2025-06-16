@@ -4,7 +4,8 @@
   "description": "e-commerce",
   "main": "index.js",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build"
   },
   "author": "Joaquin Liñan",
   "license": "ISC",
