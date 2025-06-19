@@ -6,6 +6,9 @@ const Contenedor_general = styled.article`
   /* *{
     border: 1px solid red;
   } */
+
+  background-color: #E3F2FD; 
+  
   .Header {
     display: flex;
     justify-content: space-between;
@@ -25,25 +28,36 @@ const Contenedor_general = styled.article`
     height:100%;
   }
 
-  .car-header img {
+  .car-header img{
+    background-image: url("imagenes/iconos/carrito-de-compras_Negro.png");
     width: 40px;
-    height: 40px;
-    /* align-items: center; */
+    height: 40px;  
+    background-size: cover;
   }
+
+  .car-header img:hover {
+    background-image: url("imagenes/iconos/carrito-de-compras_Azul.png");
+    width: 40px;
+    height: 40px;  
+    background-size: cover;
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
 `;
 
-export const Header = ({ carrito = [] }) => {
-    const mostrarCarrito = () => {
-        alert("sirvio");
-    };
+export const Header = ({ carrito = [],mostrarCarrito, setMostrarCarrito }) => {
+    // const mostrarCarrito = () => {
+    //     alert("sirvio");
+    // };
     return  (       
         <Contenedor_general>
             <header className="Header">
               <h1>
                 My first E-commerce
               </h1>
-              <div className="car-header" onClick={() => mostrarCarrito()}>
-                <img src="imagenes/iconos/carrito-de-compras.png" alt="Icono del carrito" />
+              <div className="car-header" onClick={() => setMostrarCarrito(!mostrarCarrito)}>
+                <img/>
                 <span>
                   ({carrito.reduce((acumulador, articulo) => acumulador + articulo.cantidad, 0)})
                 </span>

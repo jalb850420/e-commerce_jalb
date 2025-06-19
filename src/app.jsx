@@ -6,6 +6,8 @@ import styled from "styled-components";
 import "./global.css"; 
 import { productos } from "./productos";
 
+
+
 const Contenedor_general = styled.article`
   display: flex;
   flex-direction: column;
@@ -50,13 +52,14 @@ const Contenedor_general = styled.article`
 
 const App = () => {
   const [carrito, setCarrito] = useState([]); 
+  const [mostrarCarrito, setMostrarCarrito] = useState(false);
 
   const eliminarDelCarrito = (index) => {
       setCarrito(prev => prev.filter((_, i) => i !== index));
   };
   return (
     <Contenedor_general>
-      <Header carrito={carrito} />
+      <Header carrito={carrito} mostrarCarrito={mostrarCarrito} setMostrarCarrito={setMostrarCarrito}/>
       <div className="Contenedor1">
         <div className="ProductosContainer">
           {productos.map((producto, index)=> (
@@ -71,9 +74,11 @@ const App = () => {
           ))}
           {/* ========================                                                     */}
         </div>
-        <div className="Carrito">
-          <Carrito carrito={carrito} setCarrito={setCarrito} eliminarDelCarrito={eliminarDelCarrito} />
-        </div>
+        {mostrarCarrito && (
+          <div className="Carrito">
+            <Carrito carrito={carrito} setCarrito={setCarrito} eliminarDelCarrito={eliminarDelCarrito} />
+          </div>
+        )}
       </div>
     </Contenedor_general>
   );

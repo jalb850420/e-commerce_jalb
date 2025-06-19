@@ -3,56 +3,94 @@ import styled from "styled-components";
 
 
 const Contenedor_general = styled.article`
-display: block;
-border: 1px solid grey;
-border-radius:5px;
-padding:5px;
-justify-content: center;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-dorado);
+  border-radius: 10px;
+  padding: 15px;
+  background-color: white;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
-    div {
-        text-align: center;
-        margin-bottom: 5px; /* Espaciado entre los bloques */
-    }
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+  }
 
-    div_img{
-        display: flex;
-        /* justifyContent: "center";
-        alignItems: "center"; */
-        height: "250px";
-        /* border: "1px solid grey"  */
-    }
+  .div_img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    img{
-        height:300px;
-        border-radius:5px;
-    }
+.titulo {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-texto);
+  text-align: center;
+  margin-bottom: 5px;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--color-dorado);
+  background-color: #E3F2FD;
+  border-radius: 12px;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  
+  padding: 8px 12px; /* Más espacio interno */
+  line-height: 1.5; /* Ajusta la altura de la línea para evitar que el texto se corte */
+}
 
-    .div_eleccion{
-        display:flex;
-        justify-content: space-around;
-        align-items: center;
-    }
 
-    .div_eleccion select {
-        height:30px;
-    }
 
-    .div_control{
-        display: flex;
-        justify-content: center;
-        align-items: top;
-        gap: 5px;
-    }
+  img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
 
-    .div_control div {
-        display:flex;
-        align-items: center;
+  .div_eleccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .div_control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    gap: 5px
+  }
+
+  button {
+    background-color: var(--color-acento);
+    color: white;
+    border: none;
+    height: 30px; /* Igual que el input */
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: var(--color-hover);
     }
-    .input {
-        width:25px;
-        padding: 1px;
-    }
+  }
+
+  .input {
+    width: 40px;
+    height: 26px; /* Asegurar que tenga el mismo alto que los botones */
+    text-align: center;
+    border: 1px solid var(--color-texto);
+    border-radius: 5px;
+    font-size: 16px; /* Ajustar tamaño de letra para que se vea mejor */
+  }
 `;
+
 
 
 
@@ -117,7 +155,7 @@ export const Card = ({ imagen, titulo, precio, setCarrito }) => {
 
     return (
         <Contenedor_general>
-            <div>
+            <div className="titulo">
                 {titulo}
             </div>
             <div className="div_img">
